@@ -60,7 +60,4 @@ while restart == True:
 # else:
 #     dcrypt(shift=shift,text=text)
 
-
-
-
 ceaser(text,shift,direction)

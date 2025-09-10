@@ -30,9 +30,4 @@ def evaluation(dictionary):
             maximum=bid_amount
             winner=i
     return winner
-    
-
 print("winner is = ",evaluation(dictionary))
-
-
-

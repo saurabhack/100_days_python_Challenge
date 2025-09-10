@@ -1,6 +1,4 @@
 #final project :- tip calculator
-
-
 print("Welcome to the tip calculator")
 total_amount=int(input("What was the total bill ? "))
 tip=int(input("How much tip would you like to give ? "))

@@ -20,4 +20,4 @@ def calculate_love_score(name1,name2):
     combine=true_count+love_count
     print(combine)
 
-calculate_love_score("abhijeet","kimaya")
+calculate_love_score("saurabh","kamane")

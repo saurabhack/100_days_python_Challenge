@@ -22,3 +22,6 @@ while attempts!=0:
 
 if(attempts==0):
     print("You Lose the game!")
+
+
+    

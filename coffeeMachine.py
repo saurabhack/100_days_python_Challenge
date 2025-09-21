@@ -30,45 +30,53 @@ resources = {
     "coffee": 100,
 }
 
+counter=0
+while counter != 1:
 
-user_input=input("What would you like ? (espresso/latte/cappuccino): ")
+    new_resources={}
 
-def total_of_coins():
-    quarters=int(input("How many quarters: "))
-    dimes=int(input("How many dimes: "))
-    nickles=int(input("How many nickles: "))
-    pennies=int(input("How many pennies: "))
-    total=(quarters*0.25)+(dimes*0.10)+(nickles*0.5)+(pennies*0.1)
-    return total
+    user_input=input("What would you like ? (espresso/latte/cappuccino): ")
 
-def for_coffee(resources,user_input):
-    print("please insert the coins")
-    value=total_of_coins()
-    print(value)
-    if value < MENU["latte"]["cost"] :
-        print("Sorry that's not enough money. Money refunded")
-        return False
-    elif value>=MENU["latte"]["cost"]:
-        if MENU["latte"]["ingredients"]["water"] <= resources["water"] and MENU["latte"]["ingredients"]["water"] == \
-                resources["water"]:
-            print(f"Here is your latte. {user_input}!")
-            return True
-        elif MENU["latte"]["ingredients"]["water"] > resources["water"] and MENU["latte"]["ingredients"]["water"] != \
-                resources["water"]:
-            print("sorry we have no enough resource !")
+    def total_of_coins():
+        quarters=int(input("How many quarters: "))
+        dimes=int(input("How many dimes: "))
+        nickles=int(input("How many nickles: "))
+        pennies=int(input("How many pennies: "))
+        total=(quarters*0.25)+(dimes*0.10)+(nickles*0.5)+(pennies*0.1)
+        return total
+
+    def is_enough_resources(order,resources):
+        for i in MENU[order]["ingredients"]:
+            print(f"for loop from is_enough_resources functions == ", MENU[order]["ingredients"][i])
+            if resources[i]<MENU[order]["ingredients"][i]:
+                print("resources from is_enough resources==",resources[i])
+                return resources[i]
+        return True
+    def use_of_resources(order,resources):
+        for i in MENU[order]["ingredients"]:
+            resources[i]-=MENU[order]["ingredients"][i]
+        return resources
+
+
+    def for_coffee(userInput):
+        total_amount=total_of_coins()
+        if total_amount<MENU[userInput]["cost"]:
+            print("Sorry , you have not enough money")
             return False
+        elif total_amount>=MENU[userInput]["cost"]:
+            if is_enough_resources(userInput,resources)!=True:
+                print(f"Sorry we have not enough resources to make the your coffee {userInput}")
+                return False
+            elif is_enough_resources(userInput,resources)==True:
+                new_resources=use_of_resources(userInput,resources)
+                print(f"Enjoy your {userInput}")
+                return new_resources
 
+            
+    if(user_input=="report"):
+        print(f"Water: {resources['water']}")
+        print(f"Milk: {resources['milk']}")
+        print(f"Coffee: {resources['coffee']}")
 
-
-
-
-if(user_input=="report"):
-    print(f"Water: {resources['water']}")
-    print(f"Milk: {resources['milk']}")
-    print(f"Coffee: {resources['coffee']}")
-
-else:
-    pass
-
-
-print(for_coffee(resources,user_input))
+    else:
+        new_resources=for_coffee(user_input)
